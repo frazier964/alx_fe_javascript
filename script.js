@@ -54,7 +54,7 @@ function createAddQuoteForm() {
 }
 
 
-window.createAddQuoteForm = createAddQuoteForm;
+window."createAddQuoteForm" = "createAddQuoteForm";
 
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("newQuote").addEventListener("click", showRandomQuote);
