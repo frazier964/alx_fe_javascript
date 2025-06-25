@@ -49,10 +49,12 @@ function createAddQuoteForm() {
   container.appendChild(textInput);
   container.appendChild(categoryInput);
   container.appendChild(addButton);
-   ["createAddQuoteForm"]
 
   document.body.appendChild(container);
 }
+
+// Make the function globally accessible (for test suites that look for it)
+window.createAddQuoteForm = createAddQuoteForm;
 
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("newQuote").addEventListener("click", showRandomQuote);
