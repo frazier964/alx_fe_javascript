@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynamic Quote Generator</title>
+
+  <!-- tiny bit of CSS so it looks presentable -->
+  <style>
+    body       { font-family: system-ui, sans-serif; margin: 2rem; }
+    h1         { margin-bottom: 1rem; }
+    #quoteBox  { padding: 1.5rem; border: 2px dashed #999; border-radius: 8px; min-height: 4rem; }
+    #controls  { margin-top: 1.5rem; display: flex; gap: .75rem; flex-wrap: wrap; }
+    select, input[type="text"] { padding: .4rem .6rem; }
+    button     { cursor: pointer; padding: .45rem 1rem; border-radius: 4px; }
+    button:hover { background: #ececec; }
+  </style>
+</head>
+
+<body>
+  <h1>Dynamic Quote Generator</h1>
+
+  <!-- where quotes appear -->
+  <div id="quoteBox">Pick a category or hit “Random”</div>
+
+  <!-- buttons + dropdown injected by JS -->
+  <div id="controls"></div>
+
+  <!-- script at the end for better load-time performance -->
+  <script src="script.js"></script>
+</body>
+</html>
