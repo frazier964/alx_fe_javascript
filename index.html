@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynamic Quote Generator</title>
+<<<<<<< HEAD
+
+  <!-- tiny bit of CSS so it looks presentable -->
+  <style>
+    body       { font-family: system-ui, sans-serif; margin: 2rem; }
+    h1         { margin-bottom: 1rem; }
+    #quoteBox  { padding: 1.5rem; border: 2px dashed #999; border-radius: 8px; min-height: 4rem; }
+    #controls  { margin-top: 1.5rem; display: flex; gap: .75rem; flex-wrap: wrap; }
+    select, input[type="text"] { padding: .4rem .6rem; }
+    button     { cursor: pointer; padding: .45rem 1rem; border-radius: 4px; }
+    button:hover { background: #ececec; }
+  </style>
+</head>
+
+<body>
+  <h1>Dynamic Quote Generator</h1>
+
+  <!-- where quotes appear -->
+  <div id="quoteBox">Pick a category or hit “Random”</div>
+
+  <!-- buttons + dropdown injected by JS -->
+  <div id="controls"></div>
+
+  <!-- script at the end for better load-time performance -->
+=======
+</head>
+<body>
+  <h1>Dynamic Quote Generator</h1>
+
+  <div id="quoteDisplay"></div>
+
+  <button id="newQuote">Show New Quote</button>
+
+  <div>
+    <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
+    <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
+    <button id="addQuoteBtn">Add Quote</button>
+  </div>
+
+>>>>>>> 6d553adfb4d0bf5fc6ae39239bb93270ddb21173
+  <script src="script.js"></script>
+</body>
+</html>
