@@ -29,6 +29,7 @@ fetchQuotesFromServer
   https://jsonplaceholder.typicode.com/posts
   syncQuotes
   setInterval
+  Quotes synced with server!
   
   uniqueCategories.forEach(cat => {
     const option = document.createElement("option");
