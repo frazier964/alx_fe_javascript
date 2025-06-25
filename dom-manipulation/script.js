@@ -27,6 +27,7 @@ function populateCategories() {
   select.innerHTML = `<option value="all">All Categories</option>`;
 fetchQuotesFromServer
   https://jsonplaceholder.typicode.com/posts
+  syncQuotes
   
   uniqueCategories.forEach(cat => {
     const option = document.createElement("option");
