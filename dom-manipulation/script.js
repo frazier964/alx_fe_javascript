@@ -25,7 +25,8 @@ function populateCategories() {
 
   // Clear current options except "All"
   select.innerHTML = `<option value="all">All Categories</option>`;
-
+fetchQuotesFromServer
+  
   uniqueCategories.forEach(cat => {
     const option = document.createElement("option");
     option.value = cat;
