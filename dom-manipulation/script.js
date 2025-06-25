@@ -60,6 +60,86 @@ function showRandomQuote() {
   filterQuotes(); // Reuse filter logic
 }
 
+/*****************************************************************
+ *  SYNC LAYER – Mock server via JSONPlaceholder                 *
+ *****************************************************************/
+
+// ---- adjustable knobs ----------------------------------------
+const SERVER_URL    = "https://jsonplaceholder.typicode.com";
+const ENDPOINT_GET  = `${SERVER_URL}/posts?userId=1`;  // pretend posts are quotes
+const ENDPOINT_POST = `${SERVER_URL}/posts`;           // will just return 201
+const SYNC_INTERVAL_MS = 30_000;                       // 30-second polling
+
+// ---- tiny toast helper ---------------------------------------
+function toast(msg, ms = 3000) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.style.display = "block";
+  setTimeout(() => (t.style.display = "none"), ms);
+}
+
+// ---- merge + conflict-resolution ------------------------------
+// rule: if same text exists but categories differ -> take server's
+function mergeServerQuotes(serverQuotes) {
+  let merged = [...quotes];                     // start with local
+
+  serverQuotes.forEach(sq => {
+    const exists = merged.find(lq => lq.text === sq.text);
+    if (!exists) {
+      merged.push(sq);                          // new item → add
+    } else if (exists.category !== sq.category) {
+      // conflict: server wins, but keep a copy of local for user review
+      exists._conflictWith = exists.category;   // keep old cat
+      exists.category = sq.category;            // adopt server cat
+      toast(`Conflicting category for “${sq.text}” — server version kept.`);
+    }
+  });
+
+  quotes = merged;
+  saveQuotes();                // reuse your existing saver
+  populateCategories();        // dropdown refresh
+  filterQuotes();              // refresh current view
+}
+
+// ---- pull -----------------------------------------------------
+async function pullQuotesFromServer() {
+  try {
+    const res = await fetch(ENDPOINT_GET);
+    const data = await res.json();
+    if (!Array.isArray(data)) throw new Error("Bad payload");
+    // Map JSONPlaceholder "posts" → {text, category}
+    const serverQuotes = data.map(p => ({
+      text: p.title,
+      category: "Server"        // single category for demo
+    }));
+    mergeServerQuotes(serverQuotes);
+    toast("🟢 Pulled latest quotes from server");
+  } catch (err) {
+    toast("🔴 Pull failed: " + err.message);
+  }
+}
+
+// ---- push -----------------------------------------------------
+let unsyncedLocal = []; // holds quotes added since last push
+
+async function pushLocalQuotes() {
+  if (unsyncedLocal.length === 0) return;
+  try {
+    // simulate POST for each new quote
+    await Promise.all(
+      unsyncedLocal.map(q =>
+        fetch(ENDPOINT_POST, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userId: 1, title: q.text, body: q.category })
+        })
+      )
+    );
+    unsyncedLocal = [];      // clear queue
+    toast("🟢 Local quotes synced to server");
+  } catch (err) {
+    toast("🔴 Push fa
+
 function addQuote() {
   const text = document.getElementById("newQuoteText").value.trim();
   const category = document.getElementById("newQuoteCategory").value.trim();
