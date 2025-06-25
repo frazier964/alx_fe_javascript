@@ -49,6 +49,7 @@ function createAddQuoteForm() {
   container.appendChild(textInput);
   container.appendChild(categoryInput);
   container.appendChild(addButton);
+   ["createAddQuoteForm"]
 
   document.body.appendChild(container);
 }
