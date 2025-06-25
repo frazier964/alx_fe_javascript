@@ -28,6 +28,7 @@ function populateCategories() {
 fetchQuotesFromServer
   https://jsonplaceholder.typicode.com/posts
   syncQuotes
+  setInterval
   
   uniqueCategories.forEach(cat => {
     const option = document.createElement("option");
